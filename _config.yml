@@ -8,32 +8,25 @@ author:
   github: ""
   twitter: ""
 
-# Galaxy theme settings
 galaxy:
-  # Nebula color: "purple" | "blue" | "gold" | "red" | "cyan"
   nebula: "purple"
-  # Star density: "sparse" | "normal" | "dense"
   stars: "normal"
-  # Enable shooting stars animation
   shooting_stars: true
-  # Show constellation lines connecting nav items
   constellation_nav: true
-  # Reading progress comet
   comet_progress: true
 
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 timezone: UTC
+paginate: 6
+paginate_path: "/page:num/"
 
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
-
-paginate: 6
-paginate_path: "/page:num/"
 
 defaults:
   - scope:

@@ -4,9 +4,24 @@
 [![Buy on Gumroad](https://img.shields.io/badge/Buy-%2449-brightgreen.svg)](https://csswitch.gumroad.com/l/csswitch-galaxy)
 [![Live Demo](https://img.shields.io/badge/demo-live-orange.svg)](https://csswitch.github.io/jekyll-galaxy-theme/)
 
-> **⚠️ License notice:** This theme is source-available but **not free to use**.  
-> Viewing and learning from the code is welcome. Deploying it on any live site requires a [paid license](https://csswitch.gumroad.com/l/csswitch-galaxy).  
-> See [LICENSE](./LICENSE) for full terms.
+## 📄 License & Pricing
+
+|  | Free | Paid — $49 |
+|--|------|------------|
+| Personal / non-commercial site | ✅ | ✅ |
+| **Footer attribution required** | ✅ must keep | ❌ removed |
+| Commercial / client projects | ❌ | ✅ |
+| Future theme updates | ❌ | ✅ |
+| Private source repo access | ❌ | ✅ |
+
+**Free to use** on personal projects — just keep the small *"Theme by csswitch"* footer link intact.  
+**Buy the $49 license** to remove the attribution, use commercially, and receive future updates.
+
+**[Buy on Gumroad — $49 →](https://csswitch.gumroad.com/l/csswitch-galaxy)**
+
+See [LICENSE](./LICENSE) for full terms.
+
+---
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blueviolet.svg)](LICENSE)
 [![Jekyll](https://img.shields.io/badge/jekyll-4.3-blueviolet.svg)](https://jekyllrb.com)

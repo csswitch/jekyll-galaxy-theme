@@ -1,0 +1,476 @@
+// ============================================================
+// Galaxy Theme — Components
+// ============================================================
+@import 'variables';
+
+// ============================================================
+// Post constellation grid
+// ============================================================
+.constellation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $space-6;
+  padding: $space-8 0 $space-16;
+
+  @media (max-width: 660px) { grid-template-columns: 1fr; }
+}
+
+.post-star {
+  @extend .star-card;
+  padding: $space-8;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+
+  &__type {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    font-size: $text-xs;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $accent-light;
+    margin-bottom: $space-4;
+
+    &::before { content: '✦'; font-size: 0.6em; }
+  }
+
+  &__title {
+    font-size: $text-xl;
+    font-weight: 700;
+    color: white;
+    margin-bottom: $space-3;
+    line-height: 1.3;
+    transition: $transition-fast;
+  }
+
+  &__excerpt {
+    color: $text-muted;
+    font-size: $text-sm;
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: $space-6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: $text-xs;
+    color: $text-dim;
+    border-top: 1px solid $border;
+    padding-top: $space-4;
+    font-family: $font-mono;
+  }
+
+  &:hover {
+    text-decoration: none;
+    .post-star__title { color: $accent-light; }
+  }
+}
+
+// Hero / featured post (pulsar style)
+.post-pulsar {
+  @extend .star-card;
+  grid-column: 1 / -1;
+  padding: $space-10 $space-12;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $space-8;
+  align-items: center;
+
+  // Pulsing ring effect
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: $radius-lg;
+    background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(232,121,249,0.1), transparent);
+    opacity: 0;
+    transition: $transition-slow;
+    pointer-events: none;
+  }
+
+  &:hover::after { opacity: 1; }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: $text-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $accent-light;
+    font-weight: 700;
+    margin-bottom: $space-4;
+
+    &::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: $radius-full;
+      background: $accent;
+      box-shadow: 0 0 0 0 $accent-glow;
+      animation: pulsar 2s ease-out infinite;
+    }
+  }
+
+  &__title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: white;
+    margin-bottom: $space-4;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  &__excerpt {
+    color: $text-muted;
+    font-size: $text-base;
+    margin-bottom: $space-6;
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+
+  &__meta {
+    display: flex;
+    gap: $space-6;
+    font-size: $text-xs;
+    color: $text-dim;
+    font-family: $font-mono;
+  }
+
+  &__coords {
+    text-align: right;
+    font-family: $font-mono;
+    font-size: $text-xs;
+    color: $text-dim;
+    line-height: 1.8;
+
+    strong { color: $accent-light; display: block; font-size: $text-sm; }
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    padding: $space-8;
+    &__coords { display: none; }
+  }
+}
+
+@keyframes pulsar {
+  0%  { box-shadow: 0 0 0 0 rgba(168,85,247,0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(168,85,247,0); }
+  100%{ box-shadow: 0 0 0 0 rgba(168,85,247,0); }
+}
+
+// ============================================================
+// Tags
+// ============================================================
+.tag-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: $text-xs;
+  font-weight: 500;
+  color: $text-muted;
+  background: $surface;
+  border: 1px solid $border;
+  padding: 0.25em 0.65em;
+  border-radius: $radius-full;
+  transition: $transition-fast;
+  text-decoration: none;
+
+  &::before { content: '✦'; font-size: 0.55em; color: $accent; }
+
+  &:hover {
+    color: $accent-light;
+    background: $accent-subtle;
+    border-color: rgba(168,85,247,0.3);
+    text-decoration: none;
+  }
+}
+
+.tags-row { display: flex; flex-wrap: wrap; gap: $space-2; }
+
+// ============================================================
+// Hero section (home)
+// ============================================================
+.galaxy-hero {
+  padding: $space-24 0 $space-10;
+  text-align: center;
+
+  &__coordinates {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-3;
+    font-family: $font-mono;
+    font-size: $text-xs;
+    color: $accent-light;
+    background: $accent-subtle;
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: $radius-full;
+    padding: $space-1 $space-4;
+    margin-bottom: $space-6;
+    letter-spacing: 0.05em;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+    margin-bottom: $space-5;
+
+    // Star text glow
+    background: linear-gradient(135deg, white 0%, rgba(255,255,255,0.7) 60%, $accent-light 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__desc {
+    color: $text-muted;
+    font-size: $text-xl;
+    max-width: 480px;
+    margin: 0 auto $space-8;
+    line-height: 1.6;
+  }
+}
+
+// ============================================================
+// Buttons
+// ============================================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-6;
+  border-radius: $radius;
+  font-size: $text-sm;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $transition;
+  border: 1px solid transparent;
+
+  &--primary {
+    background: $accent;
+    color: white;
+    border-color: $accent;
+    box-shadow: 0 0 20px rgba(168,85,247,0.35);
+    &:hover {
+      background: $accent-light;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 0 32px rgba(168,85,247,0.5);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $text-muted;
+    border-color: $border;
+    &:hover {
+      border-color: rgba(168,85,247,0.4);
+      color: $accent-light;
+      text-decoration: none;
+    }
+  }
+}
+
+// ============================================================
+// Post page
+// ============================================================
+.post-header {
+  padding: $space-16 0 $space-8;
+  text-align: center;
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: $space-6;
+    background: linear-gradient(135deg, white 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: center;
+    gap: $space-6;
+    font-size: $text-sm;
+    color: $text-dim;
+    font-family: $font-mono;
+    flex-wrap: wrap;
+    margin-bottom: $space-6;
+  }
+}
+
+.post-body {
+  @extend .star-card;
+  padding: $space-12 $space-16;
+  margin-bottom: $space-8;
+  background: rgba(255,255,255,0.03);
+
+  h2 { margin-top: $space-10; padding-bottom: $space-3; border-bottom: 1px solid $border; }
+  h3 { margin-top: $space-8; }
+  h2:first-child, h3:first-child { margin-top: 0; }
+  p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 640px) { padding: $space-8 $space-6; }
+}
+
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+  margin-bottom: $space-10;
+
+  &__item {
+    @extend .star-card;
+    padding: $space-5 $space-6;
+    text-decoration: none;
+    color: inherit;
+    &--next { text-align: right; }
+
+    &-label {
+      display: block;
+      font-size: $text-xs;
+      color: $text-dim;
+      font-family: $font-mono;
+      margin-bottom: $space-1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    &-title {
+      font-size: $text-sm;
+      font-weight: 600;
+      color: $text-muted;
+      transition: $transition-fast;
+    }
+
+    &:hover {
+      text-decoration: none;
+      .post-nav__item-title { color: $accent-light; }
+    }
+  }
+
+  @media (max-width: 640px) { grid-template-columns: 1fr; }
+}
+
+// ============================================================
+// Copy code button
+// ============================================================
+.copy-btn {
+  position: absolute;
+  top: $space-3; right: $space-3;
+  background: $surface;
+  border: 1px solid $border;
+  color: $text-muted;
+  padding: $space-1 $space-3;
+  border-radius: $radius-sm;
+  font-size: $text-xs;
+  cursor: pointer;
+  transition: $transition-fast;
+  font-family: $font-mono;
+  &:hover { color: white; background: $surface-hover; }
+  &.copied { color: #4ade80; border-color: rgba(74,222,128,0.3); }
+}
+
+// ============================================================
+// Pagination
+// ============================================================
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-8 0 $space-16;
+
+  &__item {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: $radius-sm;
+    background: $surface;
+    border: 1px solid $border;
+    color: $text-muted;
+    font-size: $text-sm;
+    font-weight: 500;
+    text-decoration: none;
+    transition: $transition;
+    font-family: $font-mono;
+
+    &:hover, &.active {
+      background: $accent-subtle;
+      border-color: rgba(168,85,247,0.4);
+      color: $accent-light;
+      text-decoration: none;
+    }
+    &.disabled { opacity: 0.3; pointer-events: none; }
+  }
+}
+
+// ============================================================
+// Archive / Tags
+// ============================================================
+.section-title {
+  font-size: $text-2xl;
+  margin-bottom: $space-8;
+  padding-bottom: $space-4;
+  border-bottom: 1px solid $border;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  &::before { content: '✦'; color: $accent; font-size: 0.6em; }
+
+  &__count {
+    font-size: $text-sm;
+    color: $text-dim;
+    background: $surface;
+    border: 1px solid $border;
+    padding: 0.2em 0.6em;
+    border-radius: $radius-full;
+    font-family: $font-mono;
+  }
+}
+
+.archive-year {
+  margin-bottom: $space-10;
+  &__heading {
+    font-size: $text-lg; font-weight: 700;
+    color: $accent-light;
+    margin-bottom: $space-4;
+    font-family: $font-mono;
+    &::before { content: '# '; color: $text-dim; }
+  }
+  &__list { list-style: none; padding: 0; }
+  &__list li {
+    display: flex; align-items: baseline; gap: $space-4;
+    padding: $space-3 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    &:last-child { border: none; }
+  }
+  &__date {
+    font-family: $font-mono; font-size: $text-xs;
+    color: $text-dim; min-width: 80px;
+  }
+  &__link {
+    color: $text-muted; font-size: $text-sm; transition: $transition-fast;
+    &:hover { color: $accent-light; }
+  }
+}
+
+.tag-cloud {
+  @extend .star-card;
+  padding: $space-8; margin-bottom: $space-10;
+  .tags-row { gap: $space-3; }
+}

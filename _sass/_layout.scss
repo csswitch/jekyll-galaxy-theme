@@ -1,0 +1,303 @@
+// ============================================================
+// Galaxy Theme — Starfield & Space Background
+// ============================================================
+@import 'variables';
+
+// Canvas starfield (JS-driven) + CSS nebula clouds
+#galaxy-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: $z-stars;
+  pointer-events: none;
+}
+
+// Nebula glow layers (pure CSS)
+.galaxy-nebula {
+  position: fixed;
+  inset: 0;
+  z-index: $z-nebula;
+  pointer-events: none;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 70vw; height: 70vw;
+    top: -20vw; left: -15vw;
+    background: radial-gradient(ellipse, rgba(109,40,217,0.18) 0%, transparent 65%);
+    animation: nebulaDrift1 40s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 60vw; height: 60vw;
+    bottom: -10vw; right: -10vw;
+    background: radial-gradient(ellipse, rgba(232,121,249,0.12) 0%, transparent 65%);
+    animation: nebulaDrift2 55s ease-in-out infinite alternate;
+  }
+}
+
+.galaxy-nebula__mid {
+  position: absolute;
+  width: 50vw; height: 50vw;
+  top: 30%; left: 40%;
+  background: radial-gradient(ellipse, rgba(168,85,247,0.09) 0%, transparent 65%);
+  animation: nebulaDrift3 35s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaDrift1 {
+  from { transform: translate(0,0) scale(1) rotate(0deg); }
+  to   { transform: translate(40px,30px) scale(1.1) rotate(5deg); }
+}
+@keyframes nebulaDrift2 {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(-30px,-40px) scale(1.08); }
+}
+@keyframes nebulaDrift3 {
+  from { transform: translate(0,0) scale(1) rotate(0deg); }
+  to   { transform: translate(-20px,50px) scale(1.15) rotate(-8deg); }
+}
+
+// Shooting star (CSS)
+.shooting-star {
+  position: fixed;
+  top: 15%;
+  left: -20px;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, white, rgba(255,255,255,0));
+  border-radius: $radius-full;
+  z-index: $z-nebula + 1;
+  opacity: 0;
+  animation: shootingStar var(--duration, 8s) ease-in infinite;
+  animation-delay: var(--delay, 0s);
+  transform: rotate(-20deg);
+
+  &::after {
+    content: '★';
+    position: absolute;
+    left: -6px; top: -7px;
+    font-size: 10px;
+    color: white;
+  }
+
+  &:nth-child(2) { top: 35%; --duration: 12s; --delay: 3s; }
+  &:nth-child(3) { top: 55%; --duration: 9s;  --delay: 7s; }
+}
+
+@keyframes shootingStar {
+  0%   { left: -20px; opacity: 0; }
+  5%   { opacity: 1; }
+  40%  { opacity: 0.6; }
+  60%  { opacity: 0; left: 110vw; }
+  100% { left: 110vw; opacity: 0; }
+}
+
+// Comet reading progress
+.comet-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: $z-nav + 10;
+  background: linear-gradient(90deg, transparent, $nebula-mid, $nebula-edge, white);
+  transition: width 0.1s linear;
+  border-radius: $radius-full;
+
+  &::after {
+    content: '✦';
+    position: absolute;
+    right: -4px; top: -8px;
+    font-size: 12px;
+    color: $accent-light;
+    text-shadow: 0 0 8px $accent, 0 0 20px $accent-light;
+    animation: twinkle 1.5s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.7; transform: scale(0.9); }
+  to   { opacity: 1;   transform: scale(1.1); }
+}
+
+// ============================================================
+// Galaxy Theme — Navigation
+// ============================================================
+.galaxy-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: $nav-height;
+  z-index: $z-nav;
+  padding: 0 $space-6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 1, 10, 0.75);
+  border-bottom: 1px solid $border;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    color: white;
+    font-size: $text-xl;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+
+    &-icon {
+      font-size: 1.3em;
+      filter: drop-shadow(0 0 8px $accent);
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+
+    &:hover { color: $accent-light; text-decoration: none; }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    list-style: none;
+    padding: 0; margin: 0;
+
+    a {
+      position: relative;
+      color: $text-muted;
+      font-size: $text-sm;
+      font-weight: 500;
+      padding: $space-2 $space-4;
+      border-radius: $radius;
+      transition: $transition;
+      text-decoration: none;
+
+      // Star dot indicator
+      &::before {
+        content: '·';
+        position: absolute;
+        bottom: 2px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.4em;
+        color: $accent;
+        opacity: 0;
+        transition: $transition-fast;
+      }
+
+      &:hover, &.active {
+        color: white;
+        text-decoration: none;
+        &::before { opacity: 1; }
+      }
+
+      &.active { color: $accent-light; }
+    }
+  }
+
+  &__toggle {
+    display: none;
+    background: none;
+    border: 1px solid $border;
+    color: $text;
+    padding: $space-2;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: $transition-fast;
+    &:hover { background: $surface; }
+    span { display: block; width: 20px; height: 2px; background: currentColor; margin: 4px 0; border-radius: 2px; }
+  }
+
+  @media (max-width: 640px) {
+    &__links { display: none; }
+    &__toggle { display: block; }
+    &.nav-open &__links {
+      display: flex; flex-direction: column;
+      position: fixed; top: $nav-height; left: 0; right: 0;
+      background: rgba(2,1,10,0.97);
+      border-bottom: 1px solid $border;
+      padding: $space-4; gap: $space-1;
+      a { width: 100%; }
+    }
+  }
+}
+
+// ============================================================
+// Galaxy Theme — Layout
+// ============================================================
+.galaxy-page {
+  position: relative;
+  z-index: $z-content;
+  min-height: 100vh;
+  padding-top: $nav-height;
+}
+
+.galaxy-container {
+  max-width: $container;
+  margin: 0 auto;
+  padding: 0 $space-6;
+}
+
+// ============================================================
+// Galaxy Theme — Cards (stellar objects)
+// ============================================================
+.star-card {
+  position: relative;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  transition: $transition;
+  overflow: hidden;
+
+  // Twinkling corner star
+  &::before {
+    content: '✦';
+    position: absolute;
+    top: $space-4; right: $space-4;
+    font-size: $text-xs;
+    color: $accent;
+    opacity: 0;
+    transition: $transition;
+    filter: drop-shadow(0 0 6px $accent);
+  }
+
+  &:hover {
+    background: $surface-hover;
+    border-color: rgba(168,85,247,0.35);
+    box-shadow: 0 0 30px rgba(168,85,247,0.12), 0 8px 32px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+
+    &::before { opacity: 1; }
+  }
+}
+
+// ============================================================
+// Galaxy Theme — Footer
+// ============================================================
+.galaxy-footer {
+  position: relative;
+  z-index: $z-content;
+  margin-top: $space-24;
+  padding: $space-12 0 $space-8;
+  border-top: 1px solid $border;
+  text-align: center;
+
+  &__inner { max-width: $container; margin: 0 auto; padding: 0 $space-6; }
+
+  &__logo {
+    font-size: $text-2xl; font-weight: 700;
+    margin-bottom: $space-2;
+    display: flex; align-items: center; justify-content: center; gap: $space-3;
+  }
+
+  &__desc { color: $text-muted; font-size: $text-sm; margin-bottom: $space-6; }
+
+  &__links {
+    display: flex; justify-content: center; gap: $space-6;
+    margin-bottom: $space-8; flex-wrap: wrap;
+    a { color: $text-muted; font-size: $text-sm; &:hover { color: $accent-light; } }
+  }
+
+  &__copy { color: $text-dim; font-size: $text-xs; }
+}

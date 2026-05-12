@@ -1,0 +1,109 @@
+// ============================================================
+// Galaxy Theme — Base / Reset
+// ============================================================
+@import 'variables';
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: $font-body;
+  font-size: $text-base;
+  line-height: $line-height;
+  color: $text;
+  background: $space-black;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: $accent-light;
+  text-decoration: none;
+  transition: $transition-fast;
+  &:hover { color: white; }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: $font-display;
+  font-weight: 700;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+  color: white;
+  margin-bottom: $space-4;
+}
+h1 { font-size: $text-4xl; }
+h2 { font-size: $text-3xl; }
+h3 { font-size: $text-2xl; }
+h4 { font-size: $text-xl; }
+h5,h6 { font-size: $text-lg; }
+
+p { margin-bottom: $space-5; color: $text; }
+strong { color: white; font-weight: 600; }
+em { color: $accent-light; font-style: italic; }
+
+ul,ol { margin-bottom: $space-5; padding-left: $space-6; }
+li { margin-bottom: $space-1; }
+
+blockquote {
+  margin: $space-8 0;
+  padding: $space-5 $space-8;
+  border-left: 2px solid $accent;
+  background: $surface;
+  border-radius: 0 $radius $radius 0;
+  color: $text-muted;
+  font-style: italic;
+  p:last-child { margin-bottom: 0; }
+}
+
+code {
+  font-family: $font-mono;
+  font-size: 0.875em;
+  background: rgba(168, 85, 247, 0.12);
+  color: $accent-light;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+pre {
+  background: rgba(0,0,0,0.6);
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: $space-6;
+  overflow-x: auto;
+  margin-bottom: $space-6;
+  position: relative;
+  code { background: none; border: none; padding: 0; color: rgba(255,255,255,0.8); font-size: $text-sm; }
+}
+
+hr { border: none; border-top: 1px solid $border; margin: $space-10 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin-bottom: $space-6;
+  thead th {
+    background: $surface; border: 1px solid $border;
+    padding: $space-3 $space-4; text-align: left;
+    font-size: $text-sm; font-weight: 600; color: $accent-light;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  tbody td { border: 1px solid rgba(255,255,255,0.05); padding: $space-3 $space-4; }
+  tbody tr:hover td { background: $surface; }
+}
+
+img { max-width: 100%; height: auto; border-radius: $radius; display: block; }
+
+::selection { background: rgba(168,85,247,0.35); color: white; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: $space-black; }
+::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.3); border-radius: $radius-full; }
+
+:focus-visible { outline: 2px solid $accent; outline-offset: 3px; border-radius: 4px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border-width: 0;
+}

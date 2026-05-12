@@ -1,0 +1,94 @@
+// ============================================================
+// Galaxy Theme — Variables
+// ============================================================
+
+// --- Nebula palettes ---
+// Active palette is chosen via body[data-nebula] set from _config.yml
+
+// Purple nebula (default)
+$nebula-purple-1: #6d28d9;
+$nebula-purple-2: #a855f7;
+$nebula-purple-3: #e879f9;
+
+// Blue nebula
+$nebula-blue-1: #1d4ed8;
+$nebula-blue-2: #3b82f6;
+$nebula-blue-3: #67e8f9;
+
+// Gold nebula
+$nebula-gold-1: #b45309;
+$nebula-gold-2: #f59e0b;
+$nebula-gold-3: #fde68a;
+
+// --- Active (defaults, overridable) ---
+$star-white:  rgba(255, 255, 255, 0.9);
+$star-dim:    rgba(255, 255, 255, 0.3);
+$nebula-core: #6d28d9   !default;
+$nebula-mid:  #a855f7   !default;
+$nebula-edge: #e879f9   !default;
+$nebula-glow: rgba(168, 85, 247, 0.25) !default;
+$accent:      #a855f7   !default;
+$accent-light:#e879f9   !default;
+$accent-subtle: rgba(168, 85, 247, 0.12) !default;
+
+// --- Backgrounds ---
+$space-black: #02010a;
+$space-deep:  #07050f;
+$space-mid:   #0d0b1a;
+
+// --- Text ---
+$text:        rgba(255, 255, 255, 0.88);
+$text-muted:  rgba(255, 255, 255, 0.52);
+$text-dim:    rgba(255, 255, 255, 0.28);
+
+// --- Surfaces ---
+$surface:       rgba(255, 255, 255, 0.04);
+$surface-hover: rgba(255, 255, 255, 0.07);
+$border:        rgba(255, 255, 255, 0.10);
+$border-strong: rgba(255, 255, 255, 0.18);
+
+// --- Typography ---
+$font-body:    'Inter', 'Segoe UI', system-ui, sans-serif;
+$font-display: 'Inter', system-ui, sans-serif;
+$font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+$text-xs:   0.75rem;
+$text-sm:   0.875rem;
+$text-base: 1rem;
+$text-lg:   1.125rem;
+$text-xl:   1.25rem;
+$text-2xl:  1.5rem;
+$text-3xl:  1.875rem;
+$text-4xl:  2.25rem;
+$text-5xl:  3rem;
+
+$line-height: 1.75;
+$line-height-tight: 1.2;
+
+// --- Spacing ---
+$space-1: 0.25rem; $space-2: 0.5rem;  $space-3: 0.75rem;
+$space-4: 1rem;    $space-5: 1.25rem; $space-6: 1.5rem;
+$space-8: 2rem;    $space-10: 2.5rem; $space-12: 3rem;
+$space-16: 4rem;   $space-20: 5rem;   $space-24: 6rem;
+
+// --- Layout ---
+$container:      860px;
+$container-wide: 1080px;
+$nav-height:     68px;
+
+// --- Shape ---
+$radius-sm:   6px;
+$radius:      10px;
+$radius-lg:   16px;
+$radius-full: 9999px;
+
+// --- Motion ---
+$transition:      all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.15s ease;
+$transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+// --- Z-index ---
+$z-stars:  0;
+$z-nebula: 1;
+$z-content: 10;
+$z-nav:    100;
